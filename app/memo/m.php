@@ -10,8 +10,10 @@ if (!file_exists($config['controller_path'] . $className . 'Controller.php')) {
 }
 
 include($config['memo_path'] . 'controller.php');
+include($config['memo_path'] . 'model.php');
 include($config['controller_path'] .$className . 'Controller.php');
 
+$className .= 'Controller';
 $exe = new $className();
 if ($className != $methodName) {
 	$exe -> $methodName();

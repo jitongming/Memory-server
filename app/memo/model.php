@@ -8,8 +8,9 @@ class DatabaseModel {
 	private $_data = array();
 	private $_dbName = "";
 	
+	
 	public function __construct($dbname) {
-		$_dbName = $dbname;
+		$this ->_dbName = $dbname;
 	}
 	
 	/**
@@ -17,16 +18,24 @@ class DatabaseModel {
 	*	参数：无
 	*/
 	public function add() {
+		global $con;
 		$fields = array();
 		$values = array();
-		foreach $_data as $key => $value {
+		foreach ($_data as $key => $value) {
 			array_push($fields, $key);
 			array_push($values, $value);
 		}
 		$fieldsString = implode(",", $fields);
 		$valuesString = implode(",", $values);
 		$query = sprintf("INSERT INTO %s { %s } VALUES { %s }", $_dbName, $fieldsString, $valuesString);
-		return mysqli_query($con, $query);
+		
+		$result = mysqli_query($con, $query);
+		if ($row = mysqli_fetch_assoc($result)){
+			return $row;
+		} else {
+			return "Faild!";
+		}
+		
 	}
 	
 	/**
@@ -34,6 +43,7 @@ class DatabaseModel {
 	*	参数：列名，列值
 	*/
 	public function delete($rowkey, $rowvalue) {
+		global $con;
 		$query = sprintf("DELETE FROM %s WHERE %s = %s", $_dbName, $rowkey, $rowvalue);
 		return mysqli_query($con, $query);
 	}
@@ -43,8 +53,9 @@ class DatabaseModel {
 	*	参数：用作更新条件的id字段名和值
 	*/
 	public function update($idfield, $idvalue) {
+		global $con;
 		$update = array();
-		foreach $_data as $key => $value {
+		foreach ($_data as $key => $value) {
 			$string = $key . '=' . $value;
 			array_push($update, $string);
 		}
@@ -58,8 +69,16 @@ class DatabaseModel {
 	*	参数：列名，列值
 	*/
 	public function fetch($rowkey, $rowvalue) {
-		$query = sprintf("SELECT * from %s WHERE %s = %s", $_dbnName, $rowkey, $rowvalue);
-		return mysqli_query($con, $query);
+		global $con;
+		$query = sprintf("SELECT * from %s WHERE %s = %s", $this ->_dbName, $rowkey, $rowvalue);
+		$result = mysqli_query($con, $query);
+		if ($row = mysqli_fetch_assoc($result)) {
+			return $row;
+		} else {
+			return "No result";
+		}
 	}
+	
+	
 }
 ?>

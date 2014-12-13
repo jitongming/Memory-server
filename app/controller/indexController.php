@@ -1,5 +1,5 @@
 <?php
-class index extends Controller {
+class indexController extends Controller {
 	public function index() {
 		echo 'Hello world!';
 	}
