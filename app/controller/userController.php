@@ -3,7 +3,7 @@ class userController extends Controller {
 	// 查询测试
 	public function index() {		
 		$user = $this ->model('user', 'user');
-		$username = $user ->fetch('User_id', 1);
+		$username = $user ->fetch('email', 'xlk_zx@163.com');
 		print_r($user ->_data);
 		
 	}
@@ -29,6 +29,15 @@ class userController extends Controller {
 		$user ->fetch('User_id', 1);
 		$user ->set('password', '123456789');
 		echo $user ->update('User_id', 1);
+	}
+	
+	// userConf
+	public function userconf() {
+		$conf = $this ->model('conf', 'conf');
+		$conf ->defaultConf();
+		$conf ->set('nickname', 'test');
+		$conf ->set('User_id', 1);
+		$conf ->add();
 	}
 }
 ?>

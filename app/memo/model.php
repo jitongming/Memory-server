@@ -94,7 +94,7 @@ class DatabaseModel {
 	public function fetch($rowkey, $rowvalue) {
 		global $con;
 		
-		$query = sprintf("SELECT * from %s WHERE %s = %s", $this ->_dbName, $rowkey, $rowvalue);
+		$query = sprintf("SELECT * from %s WHERE %s = %s", $this ->_dbName, $rowkey, "'" . $rowvalue . "'");
 		$result = mysqli_query($con, $query);
 		
 		if ($result == FALSE){
