@@ -1,0 +1,49 @@
+div.sign-in-panel {
+	padding:15px;
+}
+div.docs-header {
+	padding-top:60px;
+	padding-bottom:60px;
+	background-color:#DDD;
+	margin-bottom:30px;
+}
+div.main-header {
+	margin-bottom:10px;
+}
+div.main-info {
+	padding-top:60px;
+	padding-bottom:60px;
+	background-color:#DAECFD;
+}
+div.panel-blue {
+	background-color:#E4F0FD;
+}
+div.dairy-box {
+	background-color:#E3DEF4;
+}
+span.dairy-title {
+	font-size:20px;
+	font-weight:bold;
+	text-shadow:#BBB 2px 2px 1px;
+}
+div.dairy-content {
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color:#BBB;
+}
+img.img-avatar {
+	width:100px;
+	height:100px;
+}
+img.img-function {
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:50px;
+	margin-bottom:50px;
+	display:inherit;
+	width:30%;
+}
+img.img-thumbnail {
+	width:200px;
+	height:150px;
+}
