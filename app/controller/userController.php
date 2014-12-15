@@ -44,5 +44,15 @@ class userController extends Controller {
 	public function register() {
 		
 	}
+	
+	public function login() {
+		$_SESSION['login'] = TRUE;
+		echo "Login!";
+	}
+	
+	public function logout() {
+		$_SESSION['login'] = FALSE;
+		echo "Logout!";
+	}
 }
 ?>

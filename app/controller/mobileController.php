@@ -10,7 +10,6 @@ class mobileController extends Controller {
 	private $inputArray;
 	
 	public function __construct() {
-		session_start();
 		
 		$json = file_get_contents("php://input");
 		$inputArray = json_decode($json, TRUE);

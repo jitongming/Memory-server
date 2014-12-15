@@ -3,6 +3,8 @@ include('app/config/general.php');
 include($config['memo_path'] . 'controller.php');
 include($config['memo_path'] . 'model.php');
 
+session_start();
+
 $queryString = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "";
 
 $queryArray = explode("/", $queryString);

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Memory - 岁月静好</title>
+
+    <!-- Bootstrap -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+	<link href="public/css/user-templete.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	</head>
+	<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="./">Memory</a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-left">
+				<li><p class="navbar-text" title="这个世界，比你想象中的，要温柔一些吧。">The world is a little more gentle than you think</p></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="inactive"><a href="about.php">About us</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+					<div class="dropdown-menu sign-in-panel">
+					<form role="form" action="user/login" method="get"> 
+						<div class="form-group">
+							<input type="text" class="form-control" id="name" placeholder="E-mail" value="test"/>
+						</div>
+						<div class="form-group">
+							<input type="password" id="pass" class="form-control" placeholder="Password" value="test"/>
+						</div>
+						<div class="form-group">&nbsp;
+							<a href="#">Forgot password</a>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-block btn-primary">Sign in</button>
+						</div>
+					</form>
+					</div>
+				</li>
+		  </ul>
+		</div>
+		</div>
+	</nav>
+	<div class="docs-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<h1>Memory</h1>
+					<p title="没错就是那个《星空的记忆》">From two eternal hearts, we wish up on a shooting star.</p>
+				</div>
+				<div class="col-lg-4">
+					<form role="form">
+						<div class="form-group">
+							<input type="text" class="form-control" id="name" placeholder="E-mail" />
+						</div>
+						<div class="form-group">
+							<input type="password" id="pass" class="form-control" placeholder="Password"/>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-block btn-success">Sign up</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="panel panel-default panel-blue">
+					<div class="panel-body">
+						<img class="img-function" src="public/img/film.png" />
+						<h2 class="text-center">A film for you</h2>
+						<p title="没错就是那个《最珍贵的宝物》">When I look back those while in my life, it always seems to be the most presious tressure.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="panel panel-default panel-blue">
+					<div class="panel-body">
+						<img class="img-function" src="public/img/magicstick.png" />
+						<h2 class="text-center">This eternity never ends</h2>
+						<p>The disappointed things maybe fade out with time, but the memories continue to the end of world.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="panel panel-default panel-blue">
+					<div class="panel-body">
+						<img class="img-function" src="public/img/footprint.png" />
+						<h2 class="text-center">Walking along beach</h2>
+						<p title="Margaret Fishback Powers -《Footprints》">"When you saw only one set of footprints, it was then that I carried you."</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse" role="navigation">
+		<div class="container">
+			<div>
+				<ul class="nav navbar-nav navbar-left">
+					<li><p class="navbar-text">Created by <a href="#" class="navbar-link">MEMORY PROJECT@UCAS</a></p></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><p id="datetext" class="navbar-text">2014.11.26</p></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="public/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/custom.js"></script>
+  </body>
+</html>
