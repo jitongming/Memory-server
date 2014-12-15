@@ -32,7 +32,7 @@ class DatabaseModel {
 		$fieldsString = implode(",", $fields);
 		$valuesString = implode(",", $values);
 		$query = sprintf("INSERT INTO %s ( %s ) VALUES ( %s )", $this ->_dbName, $fieldsString, $valuesString);
-		//print_r($query);
+		print_r($query);
 		$result = mysqli_query($con, $query);
 		
 		if ($result == TRUE){

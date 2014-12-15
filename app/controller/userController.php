@@ -5,7 +5,8 @@ class userController extends Controller {
 		$user = $this ->model('user', 'user');
 		$username = $user ->fetch('email', 'xlk_zx@163.com');
 		print_r($user ->_data);
-		
+		$this ->assign('username', $user ->_data['email']);
+		$this ->render('user');
 	}
 	
 	// 插入数据测试
@@ -38,6 +39,10 @@ class userController extends Controller {
 		$conf ->set('nickname', 'test');
 		$conf ->set('User_id', 1);
 		$conf ->add();
+	}
+	
+	public function register() {
+		
 	}
 }
 ?>

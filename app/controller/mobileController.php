@@ -44,13 +44,14 @@ class mobileController extends Controller {
 	*	}
 	*/
 	public function register() {
+		$inputArray = $this ->inputArray;
 		$user = $this ->model('user', 'user');
 		if ($user -> fetch('email', $inputArray['email']) == "No result") {
 			$user ->set('email', $inputArray['email']);
 			$user ->set('password', $inputArray['pwd']);
 			$user ->set('status', 1);
 			
-			if($user ->add() == "Failed") {
+			if($user ->add() == "Failed!") {
 				$this ->response['ret'] = 0;
 				$this ->response['msg'] = "Add user failed.";
 				
@@ -65,7 +66,7 @@ class mobileController extends Controller {
 			$conf ->set('nickname', $inputArray['nickname']);
 			$conf ->set('User_id', $userId);
 			//print_r($conf ->_data);
-			if($conf ->add() == "Failed") {
+			if($conf ->add() == "Failed!") {
 				$this ->response['ret'] = 0;
 				$this ->response['msg'] = "Add userconf failed.";
 				$this ->endResponse();
@@ -80,7 +81,7 @@ class mobileController extends Controller {
 			$this ->endResponse();
 		} else {
 			$this ->response['ret'] = 0;
-			$this ->response['msg'] = "This user existed.";
+			$this ->response['msg'] = "This email existed.";
 			$this ->endResponse();
 		}
 		
