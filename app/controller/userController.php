@@ -54,5 +54,116 @@ class userController extends Controller {
 		$_SESSION['login'] = FALSE;
 		echo "Logout!";
 	}
+	
+/**	
+	private inputArray;
+	
+	public function __construct() {
+	    session_start();
+		
+		$json = file_get_contents("php://input");
+		$inputArry = json_decode($json,TRUE);
+		
+		$this ->inputArray = $inputArray;
+	
+	}
+	
+    /**
+	*	处理注册
+	*/
+	public function register() {
+	    $inputArray = $this ->inputArray;
+		//print_r($inputArray);
+	    $user = $this ->model('user','user');
+		if ($user -> fetch('email', $inputArray['email']) == "No result") {
+			$user ->set('email', $inputArray['email']);
+			$user ->set('password', $inputArray['pwd']);
+			$user ->set('status', 1);
+			
+			if($user ->add() == "Failed") {
+			   echo "<script>alert('Add user failed.'); history.go(-1);</script>";
+			}
+			
+		    $_SESSION(login) = TRUE;	
+	    else
+		    echo "<script>alert('This user existed.'); history.go(-1);</script>";
+	
+	}
+    /**
+	*	处理登录
+	*	提交数据格式：
+	*	{
+	*		"email": "test@test.com",
+	*		"pwd": "123456789"
+	*	}
+	*/	
+	public function login() {
+		$inputArray = $this ->inputArray;
+		//print_r($inputArray);
+		$user = $this ->model('user', 'user');
+		
+		if ( $user -> fetch('email', $inputArray['email']) == "Success!") {
+			if ($user ->_data['password'] == $inputArray['pwd']) {
+				$_SESSION['login'] = TRUE;
+			}
+		    else { 
+				echo "<script>alert('Incorrect password'); history.go(-1);</script>";
+			}	
+		}
+	    else {
+            echo "<script>alert('Email not exists'); history.go(-1);</script>";
+        }
+		
+	}
+    /**
+	*	处理忘记密码
+	*	提交数据格式：
+	*	{
+	*		
+	*		
+	*	}
+	*/
+    public function forgetpass() {
+	
+	
+	
+	}
+    /**
+	*	处理注销
+	*/	
+	public function logout() {
+	    $_SESSION(login) = FALSE;
+	    unset($_SESSION(login)); 
+	}
+    /**
+	*	处理更改密码
+	*
+	*	提交数据格式：
+	*	{
+	*		"email": "test@test.com",
+	*		"oldpwd": "123456789"
+	*       "newpwd": "123456"
+	*	}
+	*/	
+	public function changepass() {
+		$inputArray = $this ->inputArray;
+		//print_r($inputArray);
+	    $user = $this ->model('user','user');
+		if ( $user -> fetch('email', $inputArray['email']) == "Success!") {
+			if ($user ->_data['password'] == $inputArray['oldpwd']) {
+			$user ->set('password', 'inputArray('newpwd')');
+		    $user ->update('email', $inputArray['email']);
+			
+			else (
+			   echo "<script>alert('incorrect oldpassword'); history.go(-1);</script>";
+			)
+				
+	
+	}
+	
+	
+	
+}
+?>	
 }
 ?>
