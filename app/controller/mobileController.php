@@ -152,24 +152,21 @@ class mobileController extends Controller {
 	*				"location":"ucas",
 	*				"add_datetime":"2014-12-12 09:19:45",
 	*				"edit_datetime":"2014-12-12 09:19:45",
-	*				"picture"":[{
-	*					""id"":""123123""
+	*				"picture":[{
+	*					"id":"123123"
 	*				},
 	*				{
-	*					""id"":""fsafdsfdsad""
+	*					"id":"fsafdsfdsad"
 	*				}],
-	*				""content"":""nice party""
+	*				"content":"nice party"
 	*			},
 	*			{
-	*				""title"":""party"",
-	*				""location"":""ucas"",
-	*				""datetime"":""2014-12-12 09:19"",
-	*				""picture"":[{
-	*					""id"":""123123""
-	*				},
-	*				{
-	*					""id"":""fsafdsfdsad""
-	*				}
+	*				"title":"party",
+	*				"location":"ucas",
+	*				"datetime":"2014-12-12 09:19",
+	*				"picture":[{
+	*					"123123",
+	*					"34324"
 	*				]
 	*			}]
 	*		}

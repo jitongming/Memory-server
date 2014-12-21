@@ -27,9 +27,9 @@ class userController extends Controller {
 	// 更新数据测试
 	public function update() {
 		$user = $this ->model('user', 'user');
-		$user ->fetch('User_id', 1);
-		$user ->set('password', '123456789');
-		echo $user ->update('User_id', 1);
+		$user ->fetch('User_id', 10);
+		$user ->set('password', 'abcdef');
+		echo $user ->update('User_id', 10);
 	}
 	
 	// userConf
@@ -47,12 +47,21 @@ class userController extends Controller {
 	
 	public function login() {
 		$_SESSION['login'] = TRUE;
-		echo "Login!";
+		$_SESSION['uid'] = $user ->_data['User_id'];
+		header('Location: /memory/');
 	}
 	
 	public function logout() {
 		$_SESSION['login'] = FALSE;
-		echo "Logout!";
+		header('Location: /memory/');
+	}
+	
+	public function forgetpass() {
+		//$user ->fetch('User_id', $_SESSION['uid']);
+		//if ($_POST['oldpass'] == $user ->_data['password']) {
+			//$user ->set()
+		//}
+		echo "密码更新成功";
 	}
 }
 ?>

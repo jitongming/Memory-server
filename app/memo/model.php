@@ -2,7 +2,7 @@
 /**
 * 数据库模型
 */
-include("database.php");
+
 
 class DatabaseModel {
 	public $_data = array();
@@ -76,7 +76,7 @@ class DatabaseModel {
 		}
 		$updateString = implode(",", $update);
 		
-		$query = sprintf("UPDATE %s SET %s WHERE %s = %s", $this ->_dbName, $updateString, $idfield, $idvalue);
+		$query = sprintf("UPDATE %s SET %s WHERE '%s' = '%s'", $this ->_dbName, $updateString, $idfield, $idvalue);
 		print_r($query);
 		$result = mysqli_query($con, $query);
 		
