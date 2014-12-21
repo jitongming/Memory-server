@@ -1,6 +1,6 @@
 <?php
 class memory extends DataBaseModel {
-	//ç”¨äºŽæŸ¥è¯¢æŒ‡å®šæ—¶é—´ä¹‹å†…çš„ä»Žç¬¬å‡ æ¡å¼€å§‹çš„è‹¥å¹²æ¡è®°å½•
+	//ÓÃÓÚ²éÑ¯Ö¸¶¨Ê±¼äÖ®ÄÚµÄ´ÓµÚ¼¸Ìõ¿ªÊ¼µÄÈô¸ÉÌõ¼ÇÂ¼
 	public function search($starttime, $endtime, $from, $count) {
 		global $con;
 		if ($starttime == "") {
