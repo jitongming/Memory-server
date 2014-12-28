@@ -1,5 +1,6 @@
 <?php
 include('app/config/general.php');
+include($config['memo_path'] . "database.php");
 include($config['memo_path'] . 'controller.php');
 include($config['memo_path'] . 'model.php');
 

@@ -2,11 +2,11 @@
 /**
 * 数据库模型
 */
-include("database.php");
+
 
 class DatabaseModel {
 	public $_data = array();
-	private $_dbName = "";
+	protected $_dbName = "";
 	
 	
 	public function __construct($dbname) {
@@ -32,7 +32,7 @@ class DatabaseModel {
 		$fieldsString = implode(",", $fields);
 		$valuesString = implode(",", $values);
 		$query = sprintf("INSERT INTO %s ( %s ) VALUES ( %s )", $this ->_dbName, $fieldsString, $valuesString);
-		print_r($query);
+		//print_r($query);
 		$result = mysqli_query($con, $query);
 		
 		if ($result == TRUE){
@@ -76,7 +76,7 @@ class DatabaseModel {
 		}
 		$updateString = implode(",", $update);
 		
-		$query = sprintf("UPDATE %s SET %s WHERE %s = %s", $this ->_dbName, $updateString, $idfield, $idvalue);
+		$query = sprintf("UPDATE %s SET %s WHERE '%s' = '%s'", $this ->_dbName, $updateString, $idfield, $idvalue);
 		print_r($query);
 		$result = mysqli_query($con, $query);
 		

@@ -133,11 +133,82 @@ class mobileController extends Controller {
 		}
 	}
 	
+	/** 查询memo列表，分页获取
+	*	提交数据格式：
+	*	{
+	*		"session_id": "sdfdsfsdafsa",
+	*		"start_time": "2014-11-30 00:00:00",
+	*		"end_time": "2014-12-31 00:00:00",
+	*		"start_num": 0,
+	*		"num": 1
+	*	}
+	*	返回数据格式：
+	*	{
+	*		"ret": 0,
+	*		"msg": "ok",
+	*		"data": {
+	*			"memory":[{
+	*				"title":"party",
+	*				"location":"ucas",
+	*				"add_datetime":"2014-12-12 09:19:45",
+	*				"edit_datetime":"2014-12-12 09:19:45",
+	*				"picture":[{
+	*					"id":"123123"
+	*				},
+	*				{
+	*					"id":"fsafdsfdsad"
+	*				}],
+	*				"content":"nice party"
+	*			},
+	*			{
+	*				"title":"party",
+	*				"location":"ucas",
+	*				"datetime":"2014-12-12 09:19",
+	*				"picture":[{
+	*					"123123",
+	*					"34324"
+	*				]
+	*			}]
+	*		}
+	*
+	*/
+	public function memories() {
+		$inputArray = $this ->inputArray;
+		//print_r($inputArray);
+		$this ->checkLogin();
+		$memo = $this ->model('memory', 'memory');
+		$starttime = isset($inputArray['start_time']) ? $inputArray['start_time'] : "";
+		$endtime = isset($inputArray['end_time']) ? $inputArray['end_time'] : "";
+		$from = $inputArray['start_num'];
+		$num = $inputArray['num'];
+		$memo ->search($starttime, $endtime, $from, $num);
+		if (count($memo ->_data) == 0) {
+			$this ->response['ret'] = 0;
+			$this ->response['msg'] = "No result";
+			$this ->endResponse();
+		}
+		$imginfo = $this ->model('image', 'imginfo');
+		foreach ($memo ->_data as $memory) {
+			$memory['']
+		}
+		$this ->response['ret'] = 1;
+		$this ->response['msg'] = "OK";
+		$this ->response['data']['memory'] = $memo ->_data;
+		$this ->endResponse();
+	}
 	// 结束修改发送请求
 	private function endResponse() {
 		header('Content-Type:text/json');
 		echo json_encode($this ->response);
 		exit();
+	}
+	// 检查登录情况
+	private function checkLogin() {
+		if (!(isset($_SESSION['login']) && $_SESSION['login'] == TRUE)) {
+			$this ->response['ret'] = 0;
+			$this ->response['msg'] = "Auth Failed";
+			$this ->endResponse();
+		}
 	}
 }
 ?>
