@@ -33,13 +33,13 @@
 					<div class="dropdown-menu sign-in-panel">
 					<form role="form" action="user/login" method="post"> 
 						<div class="form-group">
-							<input type="text" class="form-control" id="name" placeholder="E-mail" value="test"/>
+							<input type="text" class="form-control" id="email" name="email" placeholder="E-mail" value="xlk_zx@163.com"/>
 						</div>
 						<div class="form-group">
-							<input type="password" id="pass" class="form-control" placeholder="Password" value="test"/>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="123456789"/>
 						</div>
 						<div class="form-group">&nbsp;
-							<a href="#">Forgot password</a>
+							<a href="user/forgotpass">Forgot password</a>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-block btn-primary">Sign in</button>
@@ -59,12 +59,12 @@
 					<p title="没错就是那个《星空的记忆》">From two eternal hearts, we wish up on a shooting star.</p>
 				</div>
 				<div class="col-lg-4">
-					<form role="form">
+					<form role="form" action="user/register" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" id="name" placeholder="E-mail" />
+							<input type="text" class="form-control" id="email" name="email" placeholder="E-mail" />
 						</div>
 						<div class="form-group">
-							<input type="password" id="pass" class="form-control" placeholder="Password"/>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-block btn-success">Sign up</button>

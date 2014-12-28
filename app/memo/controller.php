@@ -22,7 +22,7 @@ class Controller {
 	public function render($file) {
 		global $config;
 		if (!file_exists($config['view_path'] . $file . '.html')) {
-			die("未在找到模版文件" . $file . '.html');
+			die("未找到模版文件" . $file . '.html');
 		}
 		$string = file_get_contents($config['view_path'] . $file . '.html');
 		

@@ -42,26 +42,49 @@ class userController extends Controller {
 	}
 	
 	public function register() {
-		
+		$user = $this ->model('user', 'user');
+		if ($user ->fetch('email', $_POST['email']) == 'Success!') {
+			echo "该用户已存在！";
+		} else {
+			$user ->set('email', $_POST['email']);
+			$user ->set('password', $_POST['password']);
+			$user ->set('status', 1);
+			$user ->add();
+		}
 	}
 	
 	public function login() {
-		$_SESSION['login'] = TRUE;
-		$_SESSION['uid'] = $user ->_data['User_id'];
-		header('Location: /memory/');
+		$user = $this ->model('user', 'user');
+		if ($user ->fetch('email', $_POST['email']) && 
+			$user ->_data['password'] == $_POST['password']) {
+			$_SESSION['login'] = TRUE;
+			$_SESSION['uid'] = $user ->_data['User_id'];
+			$_SESSION['email'] = $user ->_data['email'];
+			header('Location: /memory/');
+		} else {
+			header('Location: /memory/');
+		}
 	}
 	
 	public function logout() {
 		$_SESSION['login'] = FALSE;
+		$_SESSION['uid'] = 0;
+		$_SESSION['email'] = '';
 		header('Location: /memory/');
 	}
 	
-	public function forgetpass() {
-		//$user ->fetch('User_id', $_SESSION['uid']);
-		//if ($_POST['oldpass'] == $user ->_data['password']) {
-			//$user ->set()
-		//}
-		echo "密码更新成功";
+	public function forgotpass() {
+		$user ->fetch('User_id', $_SESSION['uid']);
+		if ($_POST['oldpass'] == $user ->_data['password']) {
+			$user ->set('password', $_POST['newpass']);
+			echo "密码更新成功";
+		} else {
+			echo "密码更新失败，似乎和旧密码对不上！";
+		}
+	}
+	
+	public function userinfo() {
+		echo 'Nothing!';
 	}
 }
 ?>
