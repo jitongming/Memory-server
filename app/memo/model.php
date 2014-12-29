@@ -1,3 +1,4 @@
+
 <?php
 /**
 * 数据库模型
@@ -108,6 +109,7 @@ class DatabaseModel {
 			return "No result";
 		}
 	}
+	
 	/**
 	*	修改数据方法set
 	*	参数：列名，列值

@@ -12,6 +12,7 @@ class Controller {
 			die("<h1>:(<br>对应的model" . $model . "不存在！</h1>");
 		}
 		include($config['model_path'] . $model . "Model.php");
+		
 		return new $model($dbname);
 	}
 	
@@ -19,19 +20,25 @@ class Controller {
 	*	渲染模板
 	*
 	*/
-	public function render($file) {
+	public function render($file, $render = 'YES') {
 		global $config;
+		
 		if (!file_exists($config['view_path'] . $file . '.html')) {
 			die("未找到模版文件" . $file . '.html');
 		}
+		
 		$string = file_get_contents($config['view_path'] . $file . '.html');
 		
 		foreach ($this ->view as $key => $value) {
 			$find = '{#' . $key . '}';
 			$string = str_replace($find, $value, $string);
-		} 
-		echo $string;
-		exit();
+		}
+		
+		if ($render == 'YES') {
+			echo $string;
+		} else {
+			return $string;
+		}
 	}
 	
 	/**
