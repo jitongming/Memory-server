@@ -14,6 +14,7 @@ class memoryController extends Controller {
 
 	public function publish(){
 	//还需要判断提交和session
+		date_default_timezone_set("Asia/Shanghai");
 		if(!($this ->checkLogin() == TRUE)) {  
 			echo "You don't have logged in or may be you have not submit.";
 			//echo $_POST["submit"];
@@ -21,7 +22,7 @@ class memoryController extends Controller {
 		} else {
 			if(($_POST['title'] == '')||($_POST['content'] == '')||($_POST['location'] == '')) {
 			//如果提交的字段存在空值
-				echo "填写不全";
+				echo "The commit is not...";
 				exit();
 			} else {
 				$memory = $this->model('memory','memory');
@@ -31,9 +32,14 @@ class memoryController extends Controller {
 				$memory ->set('coordinate',$_POST['location']);
 				$memory ->set('add_datetime',date('Y-m-d H:i:s',time()));
 				$memory ->set('edit_datetime',date('Y-m-d H:i:s',time()));
-				//print_r($memory);
+				$memory ->set('User_id', $_SESSION['uid']);
 				echo $memory ->add();
-				echo "publish success";
+				$memory ->fetch('add_datetime', date('Y-m-d H:i:s', time()));
+				$mp = $this ->model('mp', 'mp');
+				$mp ->set('M_id', $memory ->_data['M_id']);
+				$mp ->set('P_id', $_POST['partner']);
+				//print_r($memory);
+				echo $mp ->add();
 			}
 		}
 	}

@@ -62,6 +62,7 @@ class userController extends Controller {
 			$_SESSION['email'] = $user ->_data['email'];
 			header('Location: /memory/');
 		} else {
+			echo '<script>alert("This account isn\'t existing or password wrong...")</script>';
 			header('Location: /memory/');
 		}
 	}
@@ -86,5 +87,6 @@ class userController extends Controller {
 	public function userinfo() {
 		echo 'Nothing!';
 	}
+	
 }
 ?>

@@ -12,8 +12,13 @@ class indexController extends Controller {
 			$this ->assign('nickname',$conf ->_data['nickname']);
 			$this ->assign('background',$conf ->_data['background']);
 			
+			$this ->assign('daires', '2');
+			$this ->assign('images', '2');
+			
 			$memo = $this ->model('memory', 'memory');
-			$memo ->search('', date("Y-m-d h:M:s"), 0, 10, $user ->_data['User_id']);
+			date_default_timezone_set("Asia/Shanghai");
+			
+			$memo ->search('', date("Y-m-d H:i:s",time()), 0, 10, $user ->_data['User_id']);
 			//print_r($memo ->_data);
 			
 			//$memo = $this ->model('memory', 'memory');
