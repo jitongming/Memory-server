@@ -38,8 +38,8 @@ class memoryController extends Controller {
 				$mp = $this ->model('mp', 'mp');
 				$mp ->set('M_id', $memory ->_data['M_id']);
 				$mp ->set('P_id', $_POST['partner']);
-				//print_r($memory);
 				echo $mp ->add();
+				header('Location: /memory/');
 			}
 		}
 	}
@@ -55,14 +55,19 @@ class memoryController extends Controller {
 		} else {
 			$memory = $this ->model('memory', 'memory');
 			//？？？？？是否有这个$_POST['M_id']？？？？？？？？？
-			$memory ->fetch('M_id', $_POST['M_id']);
+			$memory ->fetch('M_id',$_POST['M_id']);
 			$memory ->set('M_title',$_POST['title']);
 			$memory ->set('M_content',$_POST['content']);
 			$memory ->set('location',$_POST['location']);
 			$memory ->set('coordinate',$_POST['location']);
 			$memory ->set('edit_datetime',date('Y-m-d H:i:s',time()));
 			echo $memory ->update('M_id',$_POST['M_id']);
-			echo "update success";
+			$mp =$this ->model('mp','mp');
+			$mp ->fetch('M_id',$_POST['M_id']);
+			$mp ->set('P_id',$_POST['partner']);
+			echo $mp ->update('M_id',$_POST['M_id']);
+			print_r($memory);
+			//header('Location: /memory/');
 		}
 	}
 	

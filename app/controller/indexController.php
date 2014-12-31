@@ -31,6 +31,7 @@ class indexController extends Controller {
 			
 			foreach ($memo ->_data as $memory) {
 				$this ->assign('add_datetime', $memory['add_datetime']);
+				$this ->assign('M_id',$memory['M_id']);
 				$this ->assign('M_title', $memory['M_title']);
 				$this ->assign('M_content', $memory['M_content']);
 				$this ->assign('edit_datetime', $memory['edit_datetime']);

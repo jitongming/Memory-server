@@ -3,7 +3,7 @@ class userController extends Controller {
 	// 查询测试
 	public function index() {		
 		$user = $this ->model('user', 'user');
-		$username = $user ->fetch('email', 'xlk_zx@163.com');
+		$username = $user ->fetch('email', $_POST['email']);
 		print_r($user ->_data);
 		$this ->assign('username', $user ->_data['email']);
 		$this ->render('user');
@@ -43,6 +43,7 @@ class userController extends Controller {
 	
 	public function register() {
 		$user = $this ->model('user', 'user');
+		$conf = $this ->model('conf','conf');
 		if ($user ->fetch('email', $_POST['email']) == 'Success!') {
 			echo "该用户已存在！";
 		} else {
@@ -50,6 +51,17 @@ class userController extends Controller {
 			$user ->set('password', $_POST['password']);
 			$user ->set('status', 1);
 			$user ->add();
+			$user ->fetch('email',$_POST['email']);
+			$conf ->set('conf_title','default');
+			$conf ->set('nickname','default');
+			$conf ->set('description','default');
+			$conf ->set('background','default.jpg');
+			$conf ->set('User_id',$user->_data['User_id']);
+			$conf ->add();
+			$_SESSION['login'] = TRUE;
+			$_SESSION['uid'] = $user ->_data['User_id'];
+			$_SESSION['email'] = $user ->_data['email'];
+			header('Location: /memory/');
 		}
 	}
 	

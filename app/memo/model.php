@@ -78,7 +78,7 @@ class DatabaseModel {
 		$updateString = implode(",", $update);
 		
 		$query = sprintf("UPDATE %s SET %s WHERE '%s' = '%s'", $this ->_dbName, $updateString, $idfield, $idvalue);
-		print_r($query);
+		//print_r($query);
 		$result = mysqli_query($con, $query);
 		
 		if ($result == TRUE){

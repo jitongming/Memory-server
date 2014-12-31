@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
 *	网站配置
 *	author:yyd
@@ -11,7 +11,7 @@ $database = array(
 	'port' => 3306,
 	'user' => 'root',
 	'pass' => '',
-	'dbname' => 'memo_db'
+	'dbname' => 'memories'
 );
 
 ?>
