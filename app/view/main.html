@@ -24,7 +24,7 @@
 			function CLoseDIV1(){ document.getElementById("editarea").style.display="none";}
 		</script>
 	</head>
-	<body 
+	<body>
 	    <div style="position:relative;">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container">
@@ -101,26 +101,31 @@
 		<div  id="publisharea" class="edit"  align="center" style="position:absolute;z-index:200;left:400px;top:5px;display:none;background-color:grey;">
 			<fieldset style="height:560px;width:600px;">
 				<legend><font color="#999999">Submit MEMO</font><a class="glyphicon glyphicon-remove" style="float:right;margin-right:20px;color:black;" onclick="CLoseDIV()"></a></legend>
-					<form action="memory/publish" method="post"> 
-						<g class="glyphicon glyphicon-pencil col-lg-8">
+					<form action="memory/publish" method="post" enctype="multipart/form-data"> 
+						<div class="glyphicon glyphicon-pencil col-lg-8">
 							<input type="text" name="title" placeholder="title"/><br /><br /><br />
-						</g>
-						<g class="glyphicon glyphicon-book col-lg-8">
+						</div>
+						<div class="glyphicon glyphicon-book col-lg-8">
 							<textarea type="text" name="content" style="width:300px;height:300px" placeholder="content"/></textarea><br/><br /><br />
-						</g>
-						<g class="glyphicon glyphicon-map-marker col-lg-8">
+						</div>
+						<div class="glyphicon glyphicon-map-marker col-lg-8">
 							<input type="text" name="location" placeholder="location"/><br /><br /><br />
-						</g>
-						<g class="glyphicon glyphicon-screenshot col-lg-8">
+						</div>
+						<div class="glyphicon glyphicon-screenshot col-lg-8">
 							<input type="text" name="coordinate" placeholder="coordinate"/><br /><br /><br />
-						</g>
-						<g class="glyphicon glyphicon-user">
-							<input type="text" name="partner" style="width:80px;"placeholder="1"/><br />
-						</g>
-						<g class="col-lg-8" style="margin-left:100px;">
+						</div>
+						<div class="glyphicon glyphicon-user">
+							<input type="text" name="partner" style="width:80px;"placeholder="1"/>
+						</div>
+						<div class="glyphicon glyphicon-picture col-lg-8">
+						    <input type="hidden" name="max_file_size" value="10000000">
+							选择要上传的图片：
+							<input type="file" name="file" id="file"/><br/>
+						</div>
+						<div class="col-lg-8" style="margin-left:100px;">
 							<input type="reset" name="reset" />
 							<input type="submit" value="submit" />
-						</g>
+						</div>
 					</form> 
 			</fieldset>
 		</div>
@@ -129,5 +134,5 @@
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="public/js/bootstrap.min.js"></script>
 		<script src="public/js/custom.js"></script>
-	</body>
+	</body>	
 </html>

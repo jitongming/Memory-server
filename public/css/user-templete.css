@@ -49,6 +49,13 @@ img.img-thumbnail {
 }
 
 div a.new-dairy{
-        color:black;
+    color:black;
 	cursor:pointer;
+}
+
+div.publish {
+	position:absolute;
+	z-index:200;
+	display:none;
+	background-color:grey;
 }

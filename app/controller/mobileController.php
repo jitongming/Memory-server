@@ -34,7 +34,7 @@ class mobileController extends Controller {
 	*	}
 	*	返回数据格式：
 	*	{
-	*		"ret": 0,
+	*		"ret": 1,
 	*		"msg": "ok",
 	*		"data": {
 	*			"register":"success",
@@ -94,7 +94,7 @@ class mobileController extends Controller {
 	*	}
 	*	返回数据格式：
 	*	{
-	*		"ret": 0,
+	*		"ret": 1,
 	*		"msg": "ok",
 	*		"data": {
 	*			"id":"123434",
@@ -115,6 +115,8 @@ class mobileController extends Controller {
 				$conf ->fetch("User_id", $user ->_data['User_id']);
 				
 				$_SESSION['login'] = TRUE;
+				$_SESSION['uid'] = $conf ->_data['User_id'];
+				
 				$this ->response['ret'] = 1;
 				$this ->response['msg'] = "OK";
 				$this ->response['data']['id'] = $user ->_data['User_id'];
@@ -132,6 +134,15 @@ class mobileController extends Controller {
 			$this ->endResponse();
 		}
 	}
+	/**
+	*
+	*/
+	public function logout() {
+		if ($_SESSION['login'] == TRUE) {
+			$_SESSION['login'] = FALSE;
+			$_SESSION['uid'] = 0;
+		}
+	}
 	
 	/** 查询memo列表，分页获取
 	*	提交数据格式：
@@ -144,7 +155,7 @@ class mobileController extends Controller {
 	*	}
 	*	返回数据格式：
 	*	{
-	*		"ret": 0,
+	*		"ret": 1,
 	*		"msg": "ok",
 	*		"data": {
 	*			"memory":[{
@@ -152,19 +163,17 @@ class mobileController extends Controller {
 	*				"location":"ucas",
 	*				"add_datetime":"2014-12-12 09:19:45",
 	*				"edit_datetime":"2014-12-12 09:19:45",
-	*				"picture":[{
-	*					"id":"123123"
-	*				},
-	*				{
-	*					"id":"fsafdsfdsad"
-	*				}],
+	*				"picture":[
+	*					"123123",
+	*					"123241"
+	*				],
 	*				"content":"nice party"
 	*			},
 	*			{
 	*				"title":"party",
 	*				"location":"ucas",
 	*				"datetime":"2014-12-12 09:19",
-	*				"picture":[{
+	*				"picture":[
 	*					"123123",
 	*					"34324"
 	*				]
@@ -181,19 +190,140 @@ class mobileController extends Controller {
 		$endtime = isset($inputArray['end_time']) ? $inputArray['end_time'] : "";
 		$from = $inputArray['start_num'];
 		$num = $inputArray['num'];
-		$memo ->search($starttime, $endtime, $from, $num);
+		$user_id = $_SESSION['uid'];
+		$memo ->search($starttime, $endtime, $from, $num, $user_id);
 		if (count($memo ->_data) == 0) {
 			$this ->response['ret'] = 0;
 			$this ->response['msg'] = "No result";
 			$this ->endResponse();
 		}
-		$imginfo = $this ->model('image', 'imginfo');
+		
+		$img = $this ->model('image', 'imginfo');
+		$mp = $this ->model('mp', 'mp');
+		$partner = $this ->model('partner','partner');
+		
+		$this ->response['data']['memory'] = array();
+		
 		foreach ($memo ->_data as $memory) {
-			$memory['']
+			$img ->fetch('M_id', $memory['M_id']);
+			$mp ->fetch('M_id', $memory['M_id']);
+			$partner ->fetch('P_id', $mp ->_data['P_id']);
+			$s_memory['title'] = $memory['M_title'];
+			$s_memory['location'] = $memory['location'];
+			$s_memory['datetime'] = $memory['add_datetime'];
+			$s_memory['picture'] = $img ->_data['img_url'];
+			$s_memory['content'] = $memory['M_content'];
+			//$s_memory['partner'] = $parter ->_data['P_id'];
+			array_push($this ->response['data']['memory'] ,$s_memory);
 		}
 		$this ->response['ret'] = 1;
 		$this ->response['msg'] = "OK";
-		$this ->response['data']['memory'] = $memo ->_data;
+		//print_r($this ->response);
+		$this ->endResponse();
+	}
+	
+	/** 
+	*	提交数据格式：
+	* 	{
+	*		"session_id": "sdfdsfsdafsa",
+	*		"title": "party",
+	*		"location": "",
+	*		"datetime": "2014-12-31 09:24:25",
+	*		"content":"tomorrow",
+	*		"people": [
+	*			"name":"jitongming",
+	*			"name":"luxiaohong"
+	*		],
+	*		"picture":[
+	*			"id":"123123",
+	*			"id":"121234"
+	*		]			
+	*	}
+	* 	返回数据格式：
+	* 	{
+	*		"ret": 1,
+	*		"msg": "ok",
+	*		"data": {
+	*			"id": "1"
+	*		}
+	*	}
+	*
+	*
+	*/
+	public function memory_add() {
+		$inputArray = $this ->inputArray;
+		$this ->checkLogin();
+
+		$memory = $this->model('memory','memory');
+		
+		$memory ->set('M_title',$inputArray['title']);
+		$memory ->set('M_content',$inputArray['content']);;
+		$memory ->set('location',$inputArray['location']);
+		$memory ->set('add_datetime',$inputArray['datetime']);
+		$memory ->set('edit_datetime',$inputArray['datetime']);
+		$memory ->set('User_id', $_SESSION['uid']);
+		
+		$memory ->add();
+		
+		$memory ->fetch('add_datetime', $inputArray['datetime']);
+		$mp = $this ->model('mp', 'mp');
+		$partner = $this ->model('partner', 'partner');
+		$partner ->fetch('Pname', $inputArray['people']);
+		
+		$mp ->set('P_id', $partner ->_data['P_id']);
+		$mp ->set('M_id', $memory ->_data['M_id']);
+		$mp ->add();
+		
+		$this ->response['ret'] = 1;
+		$this ->response['msg'] = "OK";
+		$this ->response['data']['id'] = $memory ->_data['M_id'];
+		$this ->endResponse();
+	} 
+	 
+	public function user_info() {
+		$inputArray = $this ->inputArray;
+		$this ->checkLogin();
+		
+		$user = $this ->model('user', 'user');
+		$conf = $this ->model('conf', 'conf');
+		$user ->fetch('User_id', $_SESSION['uid']);
+		$conf ->fetch('User_id', $_SESSION['uid']);
+				
+		//print_r($user ->_data);
+		//print_r($conf ->_data);
+		$this ->response['ret'] = 1;
+		$this ->response['msg'] = "OK";
+		$this ->response['data']['email'] = $user ->_data['email'];
+		$this ->response['data']['nickname'] = $conf ->_data['nickname'];
+		$this ->response['data']['picture'] = $conf ->_data['background'];
+		$this ->response['data']['password'] = $user ->_data['password'];
+		
+		$this ->endResponse();
+	}
+	
+	public function user_update() {
+		$inputArray = $this ->inputArray;
+		$this ->checkLogin();
+		
+		$user = $this ->model('user', 'user');
+		$conf = $this ->model('conf', 'conf');
+		$user ->fetch('User_id', $_SESSION['uid']);
+		$conf ->fetch('User_id', $_SESSION['uid']);
+	
+		$user ->set('password', $inputArray['password']);
+		$conf ->set('conf_title', $inputArray['conf_title']);
+		$conf ->set('nickname', $inputArray['nickname']);
+		$conf ->set('description', $inputArray['description']);
+		$conf ->set('background', $inputArray['picture']);
+		$user ->update('User_id', $_SESSION['uid']);
+		$conf ->update('User_id', $_SESSION['uid']);
+		print_r($user ->_data);
+		print_r($conf ->_data);
+		
+		$this ->response['ret'] = 1;
+		$this ->response['msg'] = 'OK';
+		$this ->response['data']['update'] = 'success';
+		
 		$this ->endResponse();
 	}
 	// 结束修改发送请求

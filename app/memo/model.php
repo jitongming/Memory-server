@@ -70,14 +70,14 @@ class DatabaseModel {
 		$update = array();
 		foreach ($this ->_data as $key => $value) {
 			if (is_string($value)) {
-				$value = "'" . $value . "'";
+				$value = '"' . $value . '"';
 			}
 			$string = $key . '=' . $value;
 			array_push($update, $string);
 		}
 		$updateString = implode(",", $update);
 		
-		$query = sprintf("UPDATE %s SET %s WHERE '%s' = '%s'", $this ->_dbName, $updateString, $idfield, $idvalue);
+		$query = sprintf("UPDATE %s SET %s WHERE %s = '%s'", $this ->_dbName, $updateString, $idfield, $idvalue);
 		//print_r($query);
 		$result = mysqli_query($con, $query);
 		
