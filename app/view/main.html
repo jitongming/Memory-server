@@ -10,18 +10,26 @@
 		<link href="public/css/bootstrap.min.css" rel="stylesheet">
 		<link href="public/css/user-templete.css" rel="stylesheet">
 		<script>
-			function Display(){ document.getElementById("publisharea").style.display="block";
-					window.onscroll=function(){ 
-					document.getElementById("publisharea").style.top=document.documentElement.scrollTop+document.body.scrollTop+5+'px';
-					}
-			    }
-			function Display1(){ document.getElementById("editarea").style.display="block";
-					window.onscroll=function(){ 
-					document.getElementById("editarea").style.top=document.documentElement.scrollTop+document.body.scrollTop+5+'px';
-					}
+			function displayNew(){ 
+				$("#publisharea").show();
+				window.onscroll = function(){ 
+					$("#publisharea")[0].style.top = document.documentElement.scrollTop + document.body.scrollTop + 5 + 'px';
 				}
-			function CLoseDIV(){ document.getElementById("publisharea").style.display="none";}
-			function CLoseDIV1(){ document.getElementById("editarea").style.display="none";}
+			}
+			function displayEdit(id){ 
+				$("#editarea").show();
+				window.onscroll = function(){ 
+					$("#editarea")[0].style.top = document.documentElement.scrollTop + document.body.scrollTop+5+'px';
+				}
+				//$('#editarea').chidren("#title").contents() = $("#" + id).children('#span.dairy-title').contents();
+			}
+			function closeNew() {
+				//console.log(thisPad);
+				$('#publisharea').hide();
+			}
+			function closeEdit() {
+				$('#editarea').hide();
+			}
 		</script>
 	</head>
 	<body>
@@ -67,7 +75,7 @@
 						<th class="text-right col-lg-2">Images</th>
 						<th class="text-left col-lg-2">{#images}</th>
 						<th class="text-left col-lg-2">
-							<a class="new-dairy" onclick="Display()">New dairy</a>
+							<a class="new-dairy" onclick="displayNew()">New dairy</a>
 						</th>
 					</tr>
 				</thead>
@@ -98,9 +106,9 @@
 			</div>
 		</nav>
 		</div>
-		<div  id="publisharea" class="edit"  align="center" style="position:absolute;z-index:200;left:400px;top:5px;display:none;background-color:grey;">
+		<div id="publisharea" class="edit"  align="center" style="position:absolute;z-index:200;left:400px;top:5px;display:none;background-color:grey;">
 			<fieldset style="height:560px;width:600px;">
-				<legend><font color="#999999">Submit MEMO</font><a class="glyphicon glyphicon-remove" style="float:right;margin-right:20px;color:black;" onclick="CLoseDIV()"></a></legend>
+				<legend><font color="#999999">Submit MEMO</font><a class="glyphicon glyphicon-remove" style="float:right;margin-right:20px;color:black;" onclick="closeNew()"></a></legend>
 					<form action="memory/publish" method="post" enctype="multipart/form-data"> 
 						<div class="glyphicon glyphicon-pencil col-lg-8">
 							<input type="text" name="title" placeholder="title"/><br /><br /><br />
@@ -121,6 +129,32 @@
 						    <input type="hidden" name="max_file_size" value="10000000">
 							选择要上传的图片：
 							<input type="file" name="file" id="file"/><br/>
+						</div>
+						<div class="col-lg-8" style="margin-left:100px;">
+							<input type="reset" name="reset" />
+							<input type="submit" value="submit" />
+						</div>
+					</form> 
+			</fieldset>
+		</div>
+		<div id="editarea" class="edit"  align="center" style="position:absolute;z-index:200;left:400px;top:5px;display:none;background-color:grey;">
+			<fieldset style="height:560px;width:600px;">
+				<legend><font color="#999999">Edit MEMO</font><a class="glyphicon glyphicon-remove" style="float:right;margin-right:20px;color:black;" onclick="closeEdit()"></a></legend>
+					<form action="memory/update" method="post"> 
+						<div class="glyphicon glyphicon-pencil col-lg-8">
+							<input type="text" name="title" id="title" value=""/><br /><br /><br />
+						</div>
+						<div class="glyphicon glyphicon-book col-lg-8">
+							<textarea type="text" name="content" style="width:300px;height:300px" /></textarea><br/><br /><br />
+						</div>
+						<div class="glyphicon glyphicon-map-marker col-lg-8">
+							<input type="text" name="location" value=""/><br /><br /><br />
+						</div>
+						<div class="glyphicon glyphicon-screenshot col-lg-8">
+							<input type="text" name="coordinate" value=""/><br /><br /><br />
+						</div>
+						<div class="glyphicon glyphicon-user">
+							<input type="text" name="partner" style="width:80px;" value=""/><br />
 						</div>
 						<div class="col-lg-8" style="margin-left:100px;">
 							<input type="reset" name="reset" />

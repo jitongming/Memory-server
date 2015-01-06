@@ -122,6 +122,7 @@ class mobileController extends Controller {
 				$this ->response['data']['id'] = $user ->_data['User_id'];
 				$this ->response['data']['nickname'] = $conf ->_data['nickname'];
 				$this ->response['data']['session_id'] = session_id();
+				//$this ->response['data']
 				$this ->endResponse();
 			} else {
 				$this ->response['ret'] = 0;
@@ -338,7 +339,7 @@ class mobileController extends Controller {
 			$this ->response['ret'] = 0;
 			$this ->response['msg'] = "Auth Failed";
 			$this ->endResponse();
-		}
+		} 
 	}
 }
-?>
+?> 

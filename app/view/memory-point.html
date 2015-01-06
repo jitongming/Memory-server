@@ -5,9 +5,11 @@
 						<p>{#add_datetime}</p>
 					</div>
 					<div class="col-lg-8">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="{#M_id}">
 							<div class="panel-heading">
-								<span class="glyphicon glyphicon-pencil dairy-title">{#M_title}</span><span><a class="new-dairy" style="float:right;margin-right:20px;" onclick="Display1()">Edit</a></span>
+								<span class="glyphicon glyphicon-pencil dairy-title">{#M_title}</span>
+								<span><a class="new-dairy" style="float:right;margin-right:20px;" onclick="alert('Are you sure?')" href="memory/destroy?id={#M_id}">Delete</a></span>
+								<span><a class="new-dairy" style="float:right;margin-right:20px;" onclick="displayEdit({#M_id})">Edit</a></span>
 							</div>
 							<div class="panel-body">
 								<div class="col-lg-4">
@@ -32,31 +34,4 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div  id="editarea" class="edit"  align="center" style="position:absolute;z-index:200;left:400px;top:5px;display:none;background-color:grey;">
-					<fieldset style="height:560px;width:600px;">
-						<legend><font color="#999999">Submit MEMO</font><a class="glyphicon glyphicon-remove" style="float:right;margin-right:20px;color:black;" onclick="CLoseDIV1()"></a></legend>
-							<form action="memory/update" method="post"> 
-								<g class="glyphicon glyphicon-pencil col-lg-8">
-								    <input type="hidden" name="M_id" value="{#M_id}"/>
-									<input type="text" name="title" value="{#M_title}"/><br /><br /><br />
-								</g>
-								<g class="glyphicon glyphicon-book col-lg-8">
-									<textarea type="text" name="content" style="width:300px;height:300px" />{#M_content}</textarea><br/><br /><br />
-								</g>
-								<g class="glyphicon glyphicon-map-marker col-lg-8">
-									<input type="text" name="location" value="{#location}"/><br /><br /><br />
-								</g>
-								<g class="glyphicon glyphicon-screenshot col-lg-8">
-									<input type="text" name="coordinate" value="{#location}"/><br /><br /><br />
-								</g>
-								<g class="glyphicon glyphicon-user">
-									<input type="text" name="partner" style="width:80px;" value="{#Pname}"/><br />
-								</g>
-								<g class="col-lg-8" style="margin-left:100px;">
-									<input type="reset" name="reset" />
-									<input type="submit" value="submit" />
-								</g>
-							</form> 
-					</fieldset>
 				</div>
