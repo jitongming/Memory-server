@@ -4,13 +4,13 @@ class memory extends DataBaseModel {
 	public function search($starttime, $endtime, $from, $count, $userid) {
 		global $con;
 		if ($starttime == "") {
-			$query = sprintf("SELECT * FROM %s WHERE User_id = %s AND add_datetime <= '%s' LIMIT %d OFFSET %d", 
+			$query = sprintf("SELECT * FROM %s WHERE User_id = %s AND add_datetime <= '%s' ORDER BY add_datetime DESC LIMIT %d OFFSET %d", 
 				$this ->_dbName, $userid, $endtime, $count, $from);
 		} else if ($endtime == ""){
-			$query = sprintf("SELECT * FROM %s WHERE User_id = %s AND add_datetime >= '%s' LIMIT %d OFFSET %d", 
+			$query = sprintf("SELECT * FROM %s WHERE User_id = %s AND add_datetime >= '%s' ORDER BY add_datetime DESC LIMIT %d OFFSET %d ", 
 				$this ->_dbName, $userid, $starttime, $count, $from);
 		} else {
-			$query = sprintf("SELECT * FROM %s WHERE User_id = %s AND add_datetime >= '%s' and add_datetime <= '%s' LIMIT %d OFFSET %d",
+			$query = sprintf("SELECT * FROM %s WHERE User_id = %s AND add_datetime >= '%s' and add_datetime <= '%s' ORDER BY add_datetime DESC LIMIT %d OFFSET %d ",
 				$this ->_dbName, $userid ,$starttime, $endtime, $count, $from);
 		}
 		

@@ -204,16 +204,20 @@ class mobileController extends Controller {
 		$partner = $this ->model('partner','partner');
 		
 		$this ->response['data']['memory'] = array();
-		
+		//$this ->
 		foreach ($memo ->_data as $memory) {
 			$img ->fetch('M_id', $memory['M_id']);
 			$mp ->fetch('M_id', $memory['M_id']);
-			$partner ->fetch('P_id', $mp ->_data['P_id']);
+			//$partner ->fetch('P_id', $mp ->_data['P_id']);
+			//print_r($partner ->_data);
+			$s_memory['id'] = $memory['M_id'];
 			$s_memory['title'] = $memory['M_title'];
 			$s_memory['location'] = $memory['location'];
+			//$s_memory['coordinate'] = $memory['coordinate'];
 			$s_memory['datetime'] = $memory['add_datetime'];
 			$s_memory['picture'] = $img ->_data['img_url'];
 			$s_memory['content'] = $memory['M_content'];
+			//$s_memory['partner'] = $partner ->_data['Pname'];
 			//$s_memory['partner'] = $parter ->_data['P_id'];
 			array_push($this ->response['data']['memory'] ,$s_memory);
 		}
@@ -274,6 +278,17 @@ class mobileController extends Controller {
 		$mp ->set('P_id', $partner ->_data['P_id']);
 		$mp ->set('M_id', $memory ->_data['M_id']);
 		$mp ->add();
+		
+		$img = $this ->model('image', 'imginfo');
+		if (isset($inputArray['picture'])) {
+			$img ->set('img_url', 'default.jpg');
+		} else {
+			$img ->set('img_url', $input['picture']);
+		}
+		$img ->set('category', 1);
+		$img ->set('User_id', $_SESSION['uid']);
+		$img ->set('M_id', $memory ->_data['M_id']);
+		$img ->add();
 		
 		$this ->response['ret'] = 1;
 		$this ->response['msg'] = "OK";

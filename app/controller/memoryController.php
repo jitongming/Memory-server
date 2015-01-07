@@ -26,7 +26,7 @@ class memoryController extends Controller {
 				exit();
 			} else {
 				$path = "public\\img\\" . $_FILES["file"]['name'];
-				print_r($_FILES);
+				///print_r($_FILES);
 				if ((($_FILES["file"]["type"] == "image/png")
 					|| ($_FILES["file"]["type"] == "image/jpeg")
 					|| ($_FILES["file"]["type"] == "image/gif"))
@@ -80,7 +80,7 @@ class memoryController extends Controller {
 				$img ->set('category','1');
 				$img ->set('User_id',$_SESSION['uid']);
 				echo $img ->add();
-				//header('Location: /memory/');
+				header('Location: /memory/');
 			}
 		}
 	}
@@ -108,7 +108,7 @@ class memoryController extends Controller {
 			$mp ->set('P_id',$_POST['partner']);
 			echo $mp ->update('M_id',$_POST['M_id']);
 			print_r($memory);
-			//header('Location: /memory/');
+			header('Location: /memory/');
 		}
 	}
 	
@@ -150,6 +150,21 @@ class memoryController extends Controller {
 			return false;
 		}
 	}	
+	
+	public function footPrint(){
+		header("Location:/memory/public/footprint/index.html");
+	}
+	
+	public function photoWall(){
+		//header("Location:/memory/app/view/photowall.html");
+		//$img= $this ->model('image','imginfo');
+		//$img ->fetch('User_id',$_SESSION['uid']);
+		//$this ->assign('image',$img ->_data['img_url']);
+		echo file_get_contents('app/view/photowall.html');
+		//$this ->render('photowall');
+	}
+
+
 }
 
 ?>

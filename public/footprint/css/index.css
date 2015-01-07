@@ -1,0 +1,23 @@
+body{
+    background:linear-gradient(to bottom right,lightblue,white);
+	width:100%;
+}
+
+#china_map{
+    margin-left:10%;
+	margin-right:10%;
+}
+
+
+#province{
+    float: left;
+    color: white;
+    font-size: 40px;
+
+}
+#province{
+    text-align: center;
+    line-height: 300px;
+    height: 300px;
+    width: 150px;
+}

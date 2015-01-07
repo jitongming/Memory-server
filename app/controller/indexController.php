@@ -12,8 +12,8 @@ class indexController extends Controller {
 			$this ->assign('nickname',$conf ->_data['nickname']);
 			$this ->assign('background',$conf ->_data['background']);
 			
-			$this ->assign('daires', '2');
-			$this ->assign('images', '2');
+			$this ->assign('footprints', '');
+			$this ->assign('photowalls', '');
 			
 			$memo = $this ->model('memory', 'memory');
 			date_default_timezone_set("Asia/Shanghai");
