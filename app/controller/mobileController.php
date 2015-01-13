@@ -295,7 +295,24 @@ class mobileController extends Controller {
 		$this ->response['data']['id'] = $memory ->_data['M_id'];
 		$this ->endResponse();
 	} 
-	 
+	/**
+	*	提交数据格式：
+	*	{
+	*		"session_id":"sdfdsfsdafsa"
+	*	}
+	*	返回数据格式：
+	* 	{
+	*		"ret": 1,
+	*		"msg": "ok",
+	*		"data": {
+	*			"email": "guan@163.com",
+	*			"nickname":"guanjichang",
+	*			"picture":"default.jpg",
+	*			"password":"123456789"
+	*		}
+	*	}
+	*
+	*/
 	public function user_info() {
 		$inputArray = $this ->inputArray;
 		$this ->checkLogin();
@@ -316,7 +333,25 @@ class mobileController extends Controller {
 		
 		$this ->endResponse();
 	}
-	
+	/**
+	*	提交数据格式：
+	*	{
+	*		"password":"987654321",
+	*		"conf_title":"test",
+	*		"nickname":"wolegequ",
+	*		"description":"what do you need?",
+	*		"picture":"yukiyuki.jpg"
+	*	}
+	*	返回数据格式：
+	* 	{
+	*		"ret": 1,
+	*		"msg": "ok",
+	*		"data": {
+	*			"update":"success"
+	*		}
+	*	}
+	*
+	*/
 	public function user_update() {
 		$inputArray = $this ->inputArray;
 		$this ->checkLogin();
